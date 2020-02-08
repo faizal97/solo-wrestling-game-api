@@ -42,9 +42,7 @@ foreach ($versions as $version)
         ], function () use ($version) {
             
             // Me
-            Route::get("me", function(){
-                return 'tes';
-            });
+            Route::get("me", "v{$version}\UserController@getMe");
             
             Route::post("me/logout", "v{$version}\LoginController@logout");
         });
