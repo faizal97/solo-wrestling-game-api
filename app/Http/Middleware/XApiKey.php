@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\ApiKey;
+use App\Models\ApiKeys;
 use Closure;
 
 class XApiKey
@@ -19,9 +19,9 @@ class XApiKey
     public function handle($request, Closure $next)
     {
         $header = $request->header(self::AUTH_HEADER);
-        $apiKey = ApiKey::getByKey($header);
+        $apiKey = ApiKeys::getByKey($header);
 
-        if ($apiKey instanceof ApiKey) {
+        if ($apiKey instanceof ApiKeys) {
             return $next($request);
         }
 
