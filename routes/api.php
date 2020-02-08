@@ -30,8 +30,18 @@ foreach ($versions as $version)
         });
         
         // Logged In Enpoints
-        Route::middleware('auth:api')->group(function () {
+        Route::group([
+            'middleware' => [
+                'auth:api',
+                'db_transaction',
+                'localization',
+            ],
+        ], function () use ($version) {
             
+            // Me
+            Route::get("v{$version}/me", function(){
+                return 'tes';
+            });
         });
     });
 }
