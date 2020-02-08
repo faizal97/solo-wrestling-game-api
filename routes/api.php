@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$versions = [1, 2];
+
+foreach ($versions as $version)
+{
+    Route::group([
+        'middleware' => [
+            'xss_protection',
+            'x_api_key',
+        ],
+    ], function() use ($version) {
+        // General Endpoint
+        Route::get("v{$version}/test", function() use ($version) {
+            return "Solo Wrestling v{$version} is Ready !";
+        });
+        
+        // Logged In Enpoints
+        Route::middleware('auth:api')->group(function () {
+            
+        });
+    });
+}
+
