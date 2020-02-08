@@ -62,6 +62,30 @@ class LoginController extends Controller
 
     public function logout()
     {
-        dd('tes');
+        try 
+        {
+            $me =  UserHelper::getLoggedInUser();
+
+            if (! $me instanceof User)
+            {
+                throw new \Exception("User's not logged in");
+            }
+
+            $me->logout()
+            ->saveOrFail();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __("Successfuly Logged Out"),
+            ]);
+
+        } 
+        catch (\Throwable $th) 
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 500);
+        }
     }
 }

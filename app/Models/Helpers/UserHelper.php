@@ -3,6 +3,7 @@
 namespace App\Models\Helpers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserHelper extends User
 {
@@ -15,5 +16,12 @@ class UserHelper extends User
     public static function findByApiToken($apiToken)
     {
         return self::where('api_token', '=', $apiToken)->first();
+    }
+
+    public static function getLoggedInUser()
+    {
+        $auth = auth()->user();
+
+        return self::find($auth->id);
     }
 }

@@ -52,7 +52,21 @@ class User extends Authenticatable
     {
         $this->generateApiToken();
         Auth::login($this);
-        
+
+        return $this;
+    }
+
+    public function logout()
+    {
+        $this->removeApiToken();
+
+        return $this;
+    }
+
+    public function removeApiToken()
+    {
+        $this->api_token = null;
+
         return $this;
     }
 

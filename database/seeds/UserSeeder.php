@@ -22,7 +22,17 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345'),
                 'api_token' => null,
-            ]
+            ],
+            [
+                'id' => 2,
+                'first_name' => 'Fayz',
+                'last_name' => 'Ard',
+                'email' => 'citizens1997@gmail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('12345'),
+                'api_token' => null,
+            ],
+
         ];
 
         foreach ($datas as $data)
