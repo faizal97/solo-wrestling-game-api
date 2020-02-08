@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             $primaryKey = [
                 'id' => $data['id'],
             ];
-            unset($data['id']);
+            
             User::updateOrCreate($primaryKey, $data);
         }
     }
