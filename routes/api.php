@@ -19,15 +19,18 @@ $versions = [1, 2];
 foreach ($versions as $version)
 {
     Route::group([
+        'prefix' => "v{$version}",
         'middleware' => [
             'xss_protection',
             'x_api_key',
         ],
     ], function() use ($version) {
         // General Endpoint
-        Route::get("v{$version}/test", function() use ($version) {
+        Route::get("test", function() use ($version) {
             return "Solo Wrestling v{$version} is Ready !";
         });
+
+        Route::post("login", "v{$version}\LoginController@login");
         
         // Logged In Enpoints
         Route::group([
@@ -39,9 +42,11 @@ foreach ($versions as $version)
         ], function () use ($version) {
             
             // Me
-            Route::get("v{$version}/me", function(){
+            Route::get("me", function(){
                 return 'tes';
             });
+            
+            Route::post("me/logout", "v{$version}\LoginController@logout");
         });
     });
 }
