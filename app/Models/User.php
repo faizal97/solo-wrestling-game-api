@@ -17,6 +17,7 @@ class User extends Authenticatable
     use SoftDeletes;
 
     protected $table = "users";
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roleData()
+    {
+        return $this->hasOne(UserRoles::class, 'user_role_id', 'role');
+    }
 
     public function validatePassword($password)
     {

@@ -15,22 +15,24 @@ class UserSeeder extends Seeder
     {
         $datas = [
             [
-                'id' => 1,
+                'user_id' => 1,
                 'first_name' => 'Faizal',
                 'last_name' => 'Ardian Putra',
                 'email' => 'faizalardianputra@yahoo.co.id',
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345'),
                 'api_token' => null,
+                'role' => 'super-admin'
             ],
             [
-                'id' => 2,
+                'user_id' => 2,
                 'first_name' => 'Fayz',
                 'last_name' => 'Ard',
                 'email' => 'citizens1997@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345'),
                 'api_token' => null,
+                'role' => 'wrestler'
             ],
 
         ];
@@ -38,7 +40,7 @@ class UserSeeder extends Seeder
         foreach ($datas as $data)
         {
             $primaryKey = [
-                'id' => $data['id'],
+                'user_id' => $data['user_id'],
             ];
             
             User::updateOrCreate($primaryKey, $data);

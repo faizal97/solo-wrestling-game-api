@@ -22,6 +22,6 @@ class UserHelper extends User
     {
         $auth = auth()->user();
 
-        return self::find($auth->id);
+        return self::find($auth->user_id);
     }
 }
